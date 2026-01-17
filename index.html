@@ -29,7 +29,7 @@
             linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
             background-size: 50px 50px;
             
-            /* เพิ่ม Animation ให้พื้นหลังขยับ */
+            /* Animation พื้นหลัง */
             animation: gridMove 10s linear infinite;
         }
 
@@ -96,13 +96,13 @@
             padding-bottom: 5px;
         }
 
+        /* --- แก้ไข: เปลี่ยนมาใช้ Flexbox เพื่อการจัดกึ่งกลางที่สมบูรณ์กว่า --- */
         .members-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: flex;
+            flex-wrap: wrap; /* ให้ปัดลงบรรทัดใหม่เมื่อจอเล็ก */
+            justify-content: center; /* จัดกึ่งกลางเสมอ */
             gap: 20px;
             margin-bottom: 40px;
-            /* เพิ่มคำสั่งนี้เพื่อจัดกลุ่มการ์ดให้อยู่กึ่งกลางหน้าจอเสมอ */
-            justify-content: center;
         }
 
         /* --- สไตล์การ์ด Member --- */
@@ -119,6 +119,11 @@
             text-decoration: none;
             color: inherit;
             cursor: pointer;
+
+            /* --- เพิ่ม: กำหนดขนาดให้เท่ากัน --- */
+            width: 300px; /* ความกว้างพื้นฐาน */
+            flex-grow: 1; /* ขยายได้นิดหน่อยเพื่อให้เต็มช่องว่างเล็กๆ */
+            max-width: 350px; /* จำกัดความกว้างไม่ให้ยืดเกินไป (แก้ปัญหา LEADER ยืด) */
         }
 
         a.member-card:hover {
@@ -127,14 +132,17 @@
             box-shadow: 0 0 20px rgba(255,255,255,0.1);
         }
 
+        /* --- รูปโปรไฟล์ (วงกลม) --- */
         .member-img {
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            object-fit: cover;
+            object-fit: scale-down; /* ใช้ scale-down ให้โลโก้ไม่ขาด */
             margin-right: 15px;
             border: 2px solid #333;
             background-color: #fff;
+            padding: 5px; 
+            box-sizing: border-box;
         }
 
         .member-info {
@@ -172,6 +180,8 @@
         @media (max-width: 600px) {
             h1.main-title { font-size: 1.8rem; }
             .navbar { padding: 10px; }
+            /* ในมือถือให้เต็มจอ */
+            a.member-card { max-width: 100%; }
         }
     </style>
 </head>
@@ -190,7 +200,7 @@
         <div class="members-grid">
             
             <a href="https://www.facebook.com/ssssssz168" target="_blank" class="member-card">
-                <img src="asdasdsa" alt="Profile" class="member-img">
+                <img src="asdasdsa.png" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Alex Dernreang</span>
                     <div class="member-display-link">
@@ -227,7 +237,7 @@
             <a href="https://www.facebook.com/amelia.leodus" target="_blank" class="member-card">
                 <img src="asdasdsa.png" alt="Profile" class="member-img">
                 <div class="member-info">
-                    <span class="member-name">Amelia Dernreang Bastien</span>
+                    <span class="member-name">Amelia Dernreang</span>
                     <div class="member-display-link">
                         <i class="fab fa-facebook"></i> CONTACT
                     </div>
@@ -245,7 +255,7 @@
             </a>
 
              <a href="https://www.facebook.com/crynetdrake168" target="_blank" class="member-card">
-                <img src="asdasdsa.png" alt="Profile" class="member-img">
+                <img src="https://media.discordapp.net/attachments/1371137473169719377/1461634894299009158/asdasdsa.png?ex=696bedd2&is=696a9c52&hm=a9e3e0193f320e5eb0727664869ec4b44f8b6122490faa5b31c10ee711b99c06&=&format=webp&quality=lossless&width=968&height=968" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Crynet Dernreang</span>
                     <div class="member-display-link">
@@ -268,24 +278,17 @@
     </div>
 
     <script>
-        // ดึงช่องค้นหามา
+        // Script ค้นหาสมาชิก
         const searchInput = document.getElementById('searchInput');
         
-        // สั่งให้ทำงานทุกครั้งที่มีการพิมพ์ (keyup)
         searchInput.addEventListener('keyup', function() {
-            // เอาค่าที่พิมพ์มาแปลงเป็นตัวเล็กทั้งหมด (จะได้ค้นหาง่ายขึ้น)
             const filter = searchInput.value.toLowerCase();
-            
-            // ดึงการ์ด Member ทั้งหมดมา
             const cards = document.querySelectorAll('.member-card');
 
-            // วนลูปเช็คการ์ดทีละใบ
             cards.forEach(card => {
-                // หาชื่อคนในการ์ดนั้น
                 const name = card.querySelector('.member-name').textContent.toLowerCase();
-                
-                // ถ้าชื่อมีคำที่พิมพ์มา ให้แสดง (flex) ถ้าไม่มีให้ซ่อน (none)
                 if (name.includes(filter)) {
+                    // ใช้ flex เพื่อให้แสดงผลสอดคล้องกับ CSS หลัก
                     card.style.display = "flex";
                 } else {
                     card.style.display = "none";
