@@ -104,7 +104,7 @@
             margin-bottom: 40px;
         }
 
-        /* --- แก้ไข: เปลี่ยน .member-card ให้รองรับการเป็น <a> tag --- */
+        /* --- สไตล์การ์ด Member (แบบลิงก์ทั้งใบ) --- */
         a.member-card {
             background: var(--card-bg);
             border: 1px solid #333;
@@ -115,25 +115,26 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            text-decoration: none; /* ลบขีดเส้นใต้ของลิงก์ออก */
-            color: inherit; /* ให้สีตัวหนังสือเหมือนเดิม */
+            text-decoration: none;
+            color: inherit;
             cursor: pointer;
         }
 
         a.member-card:hover {
-            border-color: #fff; /* เปลี่ยนสีกรอบตอนเอาเมาส์ชี้ */
+            border-color: #fff;
             transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(255,255,255,0.1); /* เพิ่มแสงเรืองรอง */
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
         }
 
+        /* --- รูปโปรไฟล์ (สำคัญ: บังคับวงกลมตรงนี้) --- */
         .member-img {
             width: 60px;
             height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
+            border-radius: 50%; /* สั่งให้เป็นวงกลม */
+            object-fit: cover; /* ให้รูปเต็มวงกลมพอดี */
             margin-right: 15px;
             border: 2px solid #333;
-            background-color: #000;
+            background-color: #fff; /* ใส่พื้นหลังขาวเพื่อให้โลโก้เด่นชัด (ถ้า PNG โปร่งใส) */
         }
 
         .member-info {
@@ -151,7 +152,6 @@
             display: block;
         }
 
-        /* เปลี่ยน member-link เป็นแค่ตัวโชว์ข้อความเฉยๆ เพราะเรากดที่การ์ดใหญ่แทน */
         .member-display-link {
             font-size: 0.85rem;
             color: var(--text-sub);
@@ -162,7 +162,6 @@
             text-overflow: ellipsis;
         }
         
-        /* เปลี่ยนสีไอคอนและข้อความลิงก์ตอนเอาเมาส์ชี้ทั้งการ์ด */
         a.member-card:hover .member-display-link {
             color: #fff;
             text-decoration: underline;
@@ -191,7 +190,7 @@
         <div class="members-grid">
             
             <a href="https://www.facebook.com/ssssssz168" target="_blank" class="member-card">
-                <img src="https://via.placeholder.com/100x100?text=CB" alt="Profile" class="member-img">
+                <img src="asdasdsa.png" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Alex Dernreang</span>
                     <div class="member-display-link">
@@ -201,7 +200,7 @@
             </a>
 
             <a href="https://www.facebook.com/jackson.nowhere.s" target="_blank" class="member-card">
-                <img src="https://via.placeholder.com/100x100?text=AB" alt="Profile" class="member-img">
+                <img src="asdasdsa.png" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Toprank Dernreang</span>
                     <div class="member-display-link">
@@ -211,7 +210,7 @@
             </a>
 
             <a href="https://www.facebook.com/darkboy.impossiblestyle" target="_blank" class="member-card">
-                <img src="https://via.placeholder.com/100x100?text=BB" alt="Profile" class="member-img">
+                <img src="asdasdsa.png" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Darkboy Dernreang</span>
                     <div class="member-display-link">
@@ -226,7 +225,7 @@
         <div class="members-grid">
             
             <a href="https://facebook.com/kurydew" target="_blank" class="member-card">
-                <img src="https://via.placeholder.com/100x100?text=KB" alt="Profile" class="member-img">
+                <img src="asdasdsa.png" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Kury Bastien</span>
                     <div class="member-display-link">
@@ -236,7 +235,7 @@
             </a>
 
             <a href="https://facebook.com/fran" target="_blank" class="member-card">
-                <img src="https://via.placeholder.com/100x100?text=FB" alt="Profile" class="member-img">
+                <img src="asdasdsa.png" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Fran Bastien</span>
                     <div class="member-display-link">
@@ -246,7 +245,7 @@
             </a>
 
              <a href="https://facebook.com/niffy" target="_blank" class="member-card">
-                <img src="https://via.placeholder.com/100x100?text=NB" alt="Profile" class="member-img">
+                <img src="asdasdsa.png" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Niffy Bastien</span>
                     <div class="member-display-link">
@@ -256,7 +255,7 @@
             </a>
 
              <a href="https://www.facebook.com/flim.Marticent" target="_blank" class="member-card">
-                <img src="https://via.placeholder.com/100x100?text=TB" alt="Profile" class="member-img">
+                <img src="asdasdsa.png" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">ZxnLouis Dernreang</span>
                     <div class="member-display-link">
@@ -266,7 +265,7 @@
             </a>
 
              <a href="https://www.facebook.com/darkboy.impossiblestyle" target="_blank" class="member-card">
-                <img src="https://via.placeholder.com/100x100?text=NB" alt="Profile" class="member-img">
+                <img src="asdasdsa.png" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Test Dernreang</span>
                     <div class="member-display-link">
