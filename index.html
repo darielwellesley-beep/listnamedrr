@@ -14,7 +14,6 @@
             --card-bg: #0f0f0f;
             --text-main: #ffffff;
             --text-sub: #a0a0a0;
-            --border-glow: rgba(255, 255, 255, 0.1);
             --accent-font: 'Orbitron', sans-serif;
         }
 
@@ -24,16 +23,24 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            /* เพิ่มพื้นหลัง Grid จางๆ ให้ดูเท่ขึ้น */
-            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            
+            /* พื้นหลัง Grid */
+            background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
             background-size: 50px 50px;
+            
+            /* เพิ่ม Animation ให้พื้นหลังขยับ */
+            animation: gridMove 10s linear infinite;
         }
 
-        /* ปุ่ม HOME ด้านซ้ายบน */
-        .navbar {
-            padding: 20px;
+        /* Keyframes สำหรับสั่งให้พื้นหลังขยับ */
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
         }
+
+        .navbar { padding: 20px; }
+        
         .home-btn {
             background: #111;
             border: 1px solid #333;
@@ -50,7 +57,6 @@
             box-shadow: 0 0 10px rgba(255,255,255,0.2);
         }
 
-        /* คอนเทนเนอร์หลัก */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -58,7 +64,6 @@
             text-align: center;
         }
 
-        /* หัวข้อใหญ่ */
         h1.main-title {
             font-family: var(--accent-font);
             font-size: 2.5rem;
@@ -68,7 +73,6 @@
             text-shadow: 0 0 10px rgba(255,255,255,0.3);
         }
 
-        /* ช่องค้นหา (ตามรูป) */
         .search-box {
             background: #111;
             border: 1px solid #333;
@@ -83,7 +87,6 @@
             outline: none;
         }
 
-        /* หัวข้อหมวดหมู่ (LEADER / MEMBERS) */
         h2.section-title {
             font-family: var(--accent-font);
             font-size: 1.5rem;
@@ -94,7 +97,6 @@
             padding-bottom: 5px;
         }
 
-        /* ระบบ Grid สำหรับจัดวางการ์ด */
         .members-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -102,8 +104,8 @@
             margin-bottom: 40px;
         }
 
-        /* การ์ดสมาชิก */
-        .member-card {
+        /* --- แก้ไข: เปลี่ยน .member-card ให้รองรับการเป็น <a> tag --- */
+        a.member-card {
             background: var(--card-bg);
             border: 1px solid #333;
             border-radius: 10px;
@@ -113,30 +115,31 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            text-decoration: none; /* ลบขีดเส้นใต้ของลิงก์ออก */
+            color: inherit; /* ให้สีตัวหนังสือเหมือนเดิม */
+            cursor: pointer;
         }
 
-        .member-card:hover {
-            border-color: #666;
+        a.member-card:hover {
+            border-color: #fff; /* เปลี่ยนสีกรอบตอนเอาเมาส์ชี้ */
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 0 20px rgba(255,255,255,0.1); /* เพิ่มแสงเรืองรอง */
         }
 
-        /* รูปภาพสมาชิก */
         .member-img {
             width: 60px;
             height: 60px;
-            border-radius: 50%; /* ทำให้รูปกลม หรือเอาออกถ้าอยากได้รูปเหลี่ยม */
+            border-radius: 50%;
             object-fit: cover;
             margin-right: 15px;
             border: 2px solid #333;
-            background-color: #000; /* สีรองพื้นกรณีรูปไม่ขึ้น */
+            background-color: #000;
         }
 
-        /* ข้อมูลสมาชิก */
         .member-info {
             text-align: left;
             flex-grow: 1;
-            overflow: hidden; /* ป้องกันข้อความยาวเกิน */
+            overflow: hidden;
         }
 
         .member-name {
@@ -148,28 +151,25 @@
             display: block;
         }
 
-        .member-link {
+        /* เปลี่ยน member-link เป็นแค่ตัวโชว์ข้อความเฉยๆ เพราะเรากดที่การ์ดใหญ่แทน */
+        .member-display-link {
             font-size: 0.85rem;
             color: var(--text-sub);
-            text-decoration: none;
             display: flex;
             align-items: center;
-            transition: color 0.2s;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-
-        .member-link:hover {
+        
+        /* เปลี่ยนสีไอคอนและข้อความลิงก์ตอนเอาเมาส์ชี้ทั้งการ์ด */
+        a.member-card:hover .member-display-link {
             color: #fff;
             text-decoration: underline;
         }
 
-        .member-link i {
-            margin-right: 5px;
-        }
+        .member-display-link i { margin-right: 5px; }
 
-        /* Responsive */
         @media (max-width: 600px) {
             h1.main-title { font-size: 1.8rem; }
             .navbar { padding: 10px; }
@@ -190,90 +190,91 @@
         <h2 class="section-title">LEADER</h2>
         <div class="members-grid">
             
-            <div class="member-card">
+            <a href="https://www.facebook.com/ssssssz168" target="_blank" class="member-card">
                 <img src="https://via.placeholder.com/100x100?text=CB" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Alex Dernreang</span>
-                    <a href="https://www.facebook.com/ssssssz168" target="_blank" class="member-link">
-                        <i class="fab fa-facebook"></i> CONTAC
-                    </a>
+                    <div class="member-display-link">
+                        <i class="fab fa-facebook"></i> CONTACT
+                    </div>
                 </div>
-            </div>
+            </a>
 
-            <div class="member-card">
+            <a href="https://www.facebook.com/jackson.nowhere.s" target="_blank" class="member-card">
                 <img src="https://via.placeholder.com/100x100?text=AB" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Toprank Dernreang</span>
-                    <a href="https://www.facebook.com/jackson.nowhere.s" target="_blank" class="member-link">
+                    <div class="member-display-link">
                         <i class="fab fa-facebook"></i> CONTACT
-                    </a>
+                    </div>
                 </div>
-            </div>
+            </a>
 
-            <div class="member-card">
+            <a href="https://www.facebook.com/darkboy.impossiblestyle" target="_blank" class="member-card">
                 <img src="https://via.placeholder.com/100x100?text=BB" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Darkboy Dernreang</span>
-                    <a href="https://www.facebook.com/darkboy.impossiblestyle" target="_blank" class="member-link">
-                        <i class="fab fa-facebook"></i> CONTAC
-                    </a>
+                    <div class="member-display-link">
+                        <i class="fab fa-facebook"></i> CONTACT
+                    </div>
                 </div>
-            </div>
+            </a>
 
         </div>
 
         <h2 class="section-title">MEMBERS</h2>
         <div class="members-grid">
             
-            <div class="member-card">
+            <a href="https://facebook.com/kurydew" target="_blank" class="member-card">
                 <img src="https://via.placeholder.com/100x100?text=KB" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Kury Bastien</span>
-                    <a href="#" class="member-link">
+                    <div class="member-display-link">
                         <i class="fab fa-facebook"></i> facebook.com/kurydew
-                    </a>
+                    </div>
                 </div>
-            </div>
+            </a>
 
-            <div class="member-card">
+            <a href="https://facebook.com/fran" target="_blank" class="member-card">
                 <img src="https://via.placeholder.com/100x100?text=FB" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Fran Bastien</span>
-                    <a href="#" class="member-link">
+                    <div class="member-display-link">
                         <i class="fab fa-facebook"></i> facebook.com/fran
-                    </a>
+                    </div>
                 </div>
-            </div>
+            </a>
 
-             <div class="member-card">
+             <a href="https://facebook.com/niffy" target="_blank" class="member-card">
                 <img src="https://via.placeholder.com/100x100?text=NB" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Niffy Bastien</span>
-                    <a href="#" class="member-link">
+                    <div class="member-display-link">
                         <i class="fab fa-facebook"></i> facebook.com/niffy
-                    </a>
+                    </div>
                 </div>
-            </div>
+            </a>
 
-             <div class="member-card">
+             <a href="https://www.facebook.com/flim.Marticent" target="_blank" class="member-card">
                 <img src="https://via.placeholder.com/100x100?text=TB" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">ZxnLouis Dernreang</span>
-                    <a href="#" class="member-link">
-                        <i class="fab fa-facebook"></i> https://www.facebook.com/flim.Marticent
-                    </a>
+                    <div class="member-display-link">
+                        <i class="fab fa-facebook"></i> facebook.com/flim.Marticent
+                    </div>
                 </div>
-            </div>
+            </a>
 
-             <div class="member-card">
+             <a href="https://www.facebook.com/darkboy.impossiblestyle" target="_blank" class="member-card">
                 <img src="https://via.placeholder.com/100x100?text=NB" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Test Dernreang</span>
-                    <a href="#" class="member-link">
-                        <i class="fab fa-facebook"></i> https://www.facebook.com/darkboy.impossiblestyle
-                    </a>
+                    <div class="member-display-link">
+                        <i class="fab fa-facebook"></i> facebook.com/darkboy
+                    </div>
                 </div>
-            </div>
+            </a>
+
         </div>
     </div>
 
