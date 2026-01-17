@@ -23,13 +23,9 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            
-            /* พื้นหลัง Grid */
             background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
             background-size: 50px 50px;
-            
-            /* Animation พื้นหลัง */
             animation: gridMove 10s linear infinite;
         }
 
@@ -72,7 +68,6 @@
             text-shadow: 0 0 10px rgba(255,255,255,0.3);
         }
 
-        /* --- แก้ไขช่องค้นหา --- */
         .search-box {
             background: #111;
             border: 1px solid #333;
@@ -81,37 +76,33 @@
             color: white;
             width: 100%;
             max-width: 400px;
-            
-            /* สั่งให้เป็นบล็อกเดี่ยวๆ อยู่ตรงกลาง และเว้นระยะด้านล่าง */
             display: block; 
             margin: 0 auto 40px auto;
-            
             text-align: center;
             font-family: var(--accent-font);
             outline: none;
         }
 
-        /* --- แก้ไขหัวข้อหมวดหมู่ --- */
         h2.section-title {
             font-family: var(--accent-font);
             font-size: 1.5rem;
-            
-            /* จัดกึ่งกลางและเว้นระยะ */
             margin: 0 auto 30px auto; 
-            
             letter-spacing: 4px;
             border-bottom: 2px solid #333;
-            display: inline-block; /* ให้เส้นใต้พอดีคำ */
+            display: inline-block;
             padding-bottom: 5px;
         }
 
-        /* --- กล่องรวมสมาชิก (Flexbox) --- */
+        /* --- แก้ไข: ระบบ Grid 3 คอลัมน์ (3 คนต่อบรรทัด) --- */
         .members-grid {
-            display: flex;
-            flex-wrap: wrap;       /* ปัดตกบรรทัดเมื่อจอเล็ก */
-            justify-content: center; /* จัดให้อยู่ตรงกลางจอเสมอ */
-            gap: 20px;             /* ระยะห่างระหว่างการ์ด */
+            display: grid;
+            /* สั่งให้แบ่งเป็น 3 ช่องเท่าๆ กัน */
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 20px;             
             margin-bottom: 50px;
+            max-width: 1100px; /* จำกัดความกว้างรวมเพื่อความสวยงาม */
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* --- การ์ดสมาชิก --- */
@@ -128,10 +119,9 @@
             text-decoration: none;
             color: inherit;
             cursor: pointer;
-
-            /* --- ล็อคขนาดให้เท่ากันทุกใบ เพื่อความเป็นระเบียบ --- */
-            width: 320px; 
-            flex-shrink: 0; /* ห้ามหดเล็กกว่านี้ (ยกเว้นมือถือ) */
+            
+            /* ให้ยืดเต็มช่อง Grid ที่กำหนดไว้ */
+            width: auto; 
         }
 
         a.member-card:hover {
@@ -140,12 +130,11 @@
             box-shadow: 0 0 20px rgba(255,255,255,0.1);
         }
 
-        /* รูปโปรไฟล์ */
         .member-img {
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            object-fit: scale-down; /* รูปไม่โดนตัด */
+            object-fit: scale-down;
             margin-right: 15px;
             border: 2px solid #333;
             background-color: #fff;
@@ -185,12 +174,19 @@
 
         .member-display-link i { margin-right: 5px; }
 
+        /* Responsive: ปรับจำนวนคนต่อบรรทัดตามขนาดจอ */
+        @media (max-width: 900px) {
+            .members-grid {
+                grid-template-columns: repeat(2, 1fr); /* แท็บเล็ตเหลือ 2 คน */
+            }
+        }
+
         @media (max-width: 600px) {
             h1.main-title { font-size: 1.8rem; }
             .navbar { padding: 10px; }
-            
-            /* ในมือถือยอมให้การ์ดเล็กลงได้ตามหน้าจอ */
-            a.member-card { width: 100%; }
+            .members-grid {
+                grid-template-columns: 1fr; /* มือถือเหลือ 1 คน */
+            }
         }
     </style>
 </head>
@@ -209,7 +205,7 @@
         <div class="members-grid">
             
             <a href="https://www.facebook.com/ssssssz168" target="_blank" class="member-card">
-                <img src="asdasdsa.png" alt="Profile" class="member-img">
+                <img src="https://img5.pic.in.th/file/secure-sv1/asdasdsa.png" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Alex Dernreang</span>
                     <div class="member-display-link">
@@ -219,7 +215,7 @@
             </a>
 
             <a href="https://www.facebook.com/jackson.nowhere.s" target="_blank" class="member-card">
-                <img src="asdasdsa.png" alt="Profile" class="member-img">
+                <img src="https://img5.pic.in.th/file/secure-sv1/asdasdsa.png" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Toprank Dernreang</span>
                     <div class="member-display-link">
@@ -229,7 +225,7 @@
             </a>
 
             <a href="https://www.facebook.com/darkboy.impossiblestyle" target="_blank" class="member-card">
-                <img src="asdasdsa.png" alt="Profile" class="member-img">
+                <img src="https://img5.pic.in.th/file/secure-sv1/asdasdsa.png" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Darkboy Dernreang</span>
                     <div class="member-display-link">
@@ -244,7 +240,7 @@
         <div class="members-grid">
             
             <a href="https://www.facebook.com/amelia.leodus" target="_blank" class="member-card">
-                <img src="asdasdsa.png" alt="Profile" class="member-img">
+                <img src="https://img5.pic.in.th/file/secure-sv1/asdasdsa.png" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Amelia Dernreang</span>
                     <div class="member-display-link">
@@ -254,7 +250,7 @@
             </a>
 
             <a href="https://www.facebook.com/pisitazx.marticent" target="_blank" class="member-card">
-                <img src="asdasdsa.png" alt="Profile" class="member-img">
+                <img src="https://img5.pic.in.th/file/secure-sv1/asdasdsa.png" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Pisitazx Dernreang</span>
                     <div class="member-display-link">
@@ -264,7 +260,7 @@
             </a>
 
              <a href="https://www.facebook.com/crynetdrake168" target="_blank" class="member-card">
-                <img src="asdasdsa.png" alt="Profile" class="member-img">
+                <img src="https://img5.pic.in.th/file/secure-sv1/asdasdsa.png" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Crynet Dernreang</span>
                     <div class="member-display-link">
@@ -274,20 +270,17 @@
             </a>
 
              <a href="https://www.facebook.com/flim.Marticent" target="_blank" class="member-card">
-                <img src="asdasdsa.png" alt="Profile" class="member-img">
+                <img src="https://img5.pic.in.th/file/secure-sv1/asdasdsa.png" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">ZxnLouis Dernreang</span>
                     <div class="member-display-link">
-                        <i class="fab fa-facebook"></i> facebook.com/flim.Marticent
+                        <i class="fab fa-facebook"></i> CONTACT
                     </div>
                 </div>
             </a>
 
-        </div>
-    </div>
-
-<a href="https://www.facebook.com/profile.php?id=61575973577280" target="_blank" class="member-card">
-                <img src="asdasdsa.png" alt="Profile" class="member-img">
+            <a href="https://www.facebook.com/profile.php?id=61575973577280" target="_blank" class="member-card">
+                <img src="https://img5.pic.in.th/file/secure-sv1/asdasdsa.png" alt="Profile" class="member-img">
                 <div class="member-info">
                     <span class="member-name">Bluex Dernreang</span>
                     <div class="member-display-link">
@@ -298,10 +291,9 @@
 
         </div>
     </div>
+
     <script>
-        // ระบบค้นหา
         const searchInput = document.getElementById('searchInput');
-        
         searchInput.addEventListener('keyup', function() {
             const filter = searchInput.value.toLowerCase();
             const cards = document.querySelectorAll('.member-card');
@@ -309,6 +301,7 @@
             cards.forEach(card => {
                 const name = card.querySelector('.member-name').textContent.toLowerCase();
                 if (name.includes(filter)) {
+                    // เปลี่ยนเป็น flex เพื่อให้แสดงผลถูกต้อง
                     card.style.display = "flex";
                 } else {
                     card.style.display = "none";
