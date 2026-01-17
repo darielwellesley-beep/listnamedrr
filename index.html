@@ -33,7 +33,6 @@
             animation: gridMove 10s linear infinite;
         }
 
-        /* Keyframes สำหรับสั่งให้พื้นหลังขยับ */
         @keyframes gridMove {
             0% { background-position: 0 0; }
             100% { background-position: 50px 50px; }
@@ -102,9 +101,11 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             margin-bottom: 40px;
+            /* เพิ่มคำสั่งนี้เพื่อจัดกลุ่มการ์ดให้อยู่กึ่งกลางหน้าจอเสมอ */
+            justify-content: center;
         }
 
-        /* --- สไตล์การ์ด Member (แบบลิงก์ทั้งใบ) --- */
+        /* --- สไตล์การ์ด Member --- */
         a.member-card {
             background: var(--card-bg);
             border: 1px solid #333;
@@ -126,15 +127,14 @@
             box-shadow: 0 0 20px rgba(255,255,255,0.1);
         }
 
-        /* --- รูปโปรไฟล์ (สำคัญ: บังคับวงกลมตรงนี้) --- */
         .member-img {
             width: 60px;
             height: 60px;
-            border-radius: 50%; /* สั่งให้เป็นวงกลม */
-            object-fit: cover; /* ให้รูปเต็มวงกลมพอดี */
+            border-radius: 50%;
+            object-fit: cover;
             margin-right: 15px;
             border: 2px solid #333;
-            background-color: #fff; /* ใส่พื้นหลังขาวเพื่อให้โลโก้เด่นชัด (ถ้า PNG โปร่งใส) */
+            background-color: #fff;
         }
 
         .member-info {
@@ -178,13 +178,13 @@
 <body>
 
     <div class="navbar">
-        <a href="#" class="home-btn">HOME</a>
+        <a href="https://dernreangclub.netlify.app/" class="home-btn">HOME</a>
     </div>
 
     <div class="container">
         <h1 class="main-title">DERNREANG ALL</h1>
         
-        <input type="text" class="search-box" placeholder="ค้นหาสมาชิก...">
+        <input type="text" id="searchInput" class="search-box" placeholder="ค้นหาสมาชิก...">
 
         <h2 class="section-title">LEADER</h2>
         <div class="members-grid">
@@ -266,6 +266,33 @@
 
         </div>
     </div>
+
+    <script>
+        // ดึงช่องค้นหามา
+        const searchInput = document.getElementById('searchInput');
+        
+        // สั่งให้ทำงานทุกครั้งที่มีการพิมพ์ (keyup)
+        searchInput.addEventListener('keyup', function() {
+            // เอาค่าที่พิมพ์มาแปลงเป็นตัวเล็กทั้งหมด (จะได้ค้นหาง่ายขึ้น)
+            const filter = searchInput.value.toLowerCase();
+            
+            // ดึงการ์ด Member ทั้งหมดมา
+            const cards = document.querySelectorAll('.member-card');
+
+            // วนลูปเช็คการ์ดทีละใบ
+            cards.forEach(card => {
+                // หาชื่อคนในการ์ดนั้น
+                const name = card.querySelector('.member-name').textContent.toLowerCase();
+                
+                // ถ้าชื่อมีคำที่พิมพ์มา ให้แสดง (flex) ถ้าไม่มีให้ซ่อน (none)
+                if (name.includes(filter)) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
