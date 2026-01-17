@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BASTIENBOYZ MEMBERS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- CSS ส่วนตกแต่ง --- */
+        :root {
+            --bg-color: #050505;
+            --card-bg: #0f0f0f;
+            --text-main: #ffffff;
+            --text-sub: #a0a0a0;
+            --border-glow: rgba(255, 255, 255, 0.1);
+            --accent-font: 'Orbitron', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            /* เพิ่มพื้นหลัง Grid จางๆ ให้ดูเท่ขึ้น */
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        /* ปุ่ม HOME ด้านซ้ายบน */
+        .navbar {
+            padding: 20px;
+        }
+        .home-btn {
+            background: #111;
+            border: 1px solid #333;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-family: var(--accent-font);
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .home-btn:hover {
+            border-color: #fff;
+            box-shadow: 0 0 10px rgba(255,255,255,0.2);
+        }
+
+        /* คอนเทนเนอร์หลัก */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* หัวข้อใหญ่ */
+        h1.main-title {
+            font-family: var(--accent-font);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        /* ช่องค้นหา (ตามรูป) */
+        .search-box {
+            background: #111;
+            border: 1px solid #333;
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: white;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 40px;
+            text-align: center;
+            font-family: var(--accent-font);
+            outline: none;
+        }
+
+        /* หัวข้อหมวดหมู่ (LEADER / MEMBERS) */
+        h2.section-title {
+            font-family: var(--accent-font);
+            font-size: 1.5rem;
+            margin: 40px 0 20px 0;
+            letter-spacing: 4px;
+            border-bottom: 2px solid #333;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* ระบบ Grid สำหรับจัดวางการ์ด */
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        /* การ์ดสมาชิก */
+        .member-card {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-card:hover {
+            border-color: #666;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        /* รูปภาพสมาชิก */
+        .member-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%; /* ทำให้รูปกลม หรือเอาออกถ้าอยากได้รูปเหลี่ยม */
+            object-fit: cover;
+            margin-right: 15px;
+            border: 2px solid #333;
+            background-color: #000; /* สีรองพื้นกรณีรูปไม่ขึ้น */
+        }
+
+        /* ข้อมูลสมาชิก */
+        .member-info {
+            text-align: left;
+            flex-grow: 1;
+            overflow: hidden; /* ป้องกันข้อความยาวเกิน */
+        }
+
+        .member-name {
+            font-family: var(--accent-font);
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #fff;
+            display: block;
+        }
+
+        .member-link {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .member-link:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .member-link i {
+            margin-right: 5px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1.main-title { font-size: 1.8rem; }
+            .navbar { padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="#" class="home-btn">HOME</a>
+    </div>
+
+    <div class="container">
+        <h1 class="main-title">BASTIENBOYZ MEMBERS</h1>
+        
+        <input type="text" class="search-box" placeholder="ค้นหาสมาชิก...">
+
+        <h2 class="section-title">LEADER</h2>
+        <div class="members-grid">
+            
+            <div class="member-card">
+                <img src="https://via.placeholder.com/100x100?text=CB" alt="Profile" class="member-img">
+                <div class="member-info">
+                    <span class="member-name">Cyric Bastien</span>
+                    <a href="https://facebook.com/cyric.bastien" target="_blank" class="member-link">
+                        <i class="fab fa-facebook"></i> facebook.com/cyric.bastien
+                    </a>
+                </div>
+            </div>
+
+            <div class="member-card">
+                <img src="https://via.placeholder.com/100x100?text=AB" alt="Profile" class="member-img">
+                <div class="member-info">
+                    <span class="member-name">Alfred Bastien</span>
+                    <a href="https://facebook.com/alfred" target="_blank" class="member-link">
+                        <i class="fab fa-facebook"></i> facebook.com/alfred
+                    </a>
+                </div>
+            </div>
+
+            <div class="member-card">
+                <img src="https://via.placeholder.com/100x100?text=BB" alt="Profile" class="member-img">
+                <div class="member-info">
+                    <span class="member-name">Bastien Bastien</span>
+                    <a href="https://facebook.com/bastien123" target="_blank" class="member-link">
+                        <i class="fab fa-facebook"></i> facebook.com/bastien123
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <h2 class="section-title">MEMBERS</h2>
+        <div class="members-grid">
+            
+            <div class="member-card">
+                <img src="https://via.placeholder.com/100x100?text=KB" alt="Profile" class="member-img">
+                <div class="member-info">
+                    <span class="member-name">Kury Bastien</span>
+                    <a href="#" class="member-link">
+                        <i class="fab fa-facebook"></i> facebook.com/kurydew
+                    </a>
+                </div>
+            </div>
+
+            <div class="member-card">
+                <img src="https://via.placeholder.com/100x100?text=FB" alt="Profile" class="member-img">
+                <div class="member-info">
+                    <span class="member-name">Fran Bastien</span>
+                    <a href="#" class="member-link">
+                        <i class="fab fa-facebook"></i> facebook.com/fran
+                    </a>
+                </div>
+            </div>
+
+             <div class="member-card">
+                <img src="https://via.placeholder.com/100x100?text=NB" alt="Profile" class="member-img">
+                <div class="member-info">
+                    <span class="member-name">Niffy Bastien</span>
+                    <a href="#" class="member-link">
+                        <i class="fab fa-facebook"></i> facebook.com/niffy
+                    </a>
+                </div>
+            </div>
+
+             <div class="member-card">
+                <img src="https://via.placeholder.com/100x100?text=TB" alt="Profile" class="member-img">
+                <div class="member-info">
+                    <span class="member-name">Taehyun Bastien</span>
+                    <a href="#" class="member-link">
+                        <i class="fab fa-facebook"></i> facebook.com/taehyun
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
